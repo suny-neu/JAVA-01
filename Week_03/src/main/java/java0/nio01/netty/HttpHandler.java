@@ -55,7 +55,7 @@ public class HttpHandler extends ChannelInboundHandlerAdapter {
             //打开浏览器
             CloseableHttpClient httpClient= HttpClients.createDefault();
             //声明get请求
-            HttpGet httpGet=new HttpGet("http://localhost:8808");
+            HttpGet httpGet=new HttpGet("http://localhost:8801");
             //3.发送请求
             CloseableHttpResponse response1 = httpClient.execute(httpGet);
             if(response1.getStatusLine().getStatusCode()==200){
@@ -66,7 +66,7 @@ public class HttpHandler extends ChannelInboundHandlerAdapter {
             response1.close();
             httpClient.close();
             response = new DefaultFullHttpResponse(HTTP_1_1, OK, Unpooled.wrappedBuffer(value.getBytes("UTF-8")));
-            response.headers().set("Content-Type", "application/json");
+            response.headers().set("Content-Type", "text/plain");
             response.headers().setInt("Content-Length", response.content().readableBytes());
 
         } catch (Exception e) {
