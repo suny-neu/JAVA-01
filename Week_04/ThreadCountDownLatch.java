@@ -4,25 +4,18 @@ import java.util.concurrent.CountDownLatch;
 
 public class ThreadCountDownLatch {
     private static int value=0;
-    public static  void sum(){
-        Caculate caculate= new Caculate();
-        value=caculate.getSum();
-    }
-
-    public static int getSum(){
-        return value;
-    }
+    private static Caculate caculate=new Caculate();
 
     public static void main(String[] args) throws InterruptedException {
 
         CountDownLatch  latch=new CountDownLatch(1);
         Thread t=new Thread(()->{
-            sum();
+            caculate.getSum();
             latch.countDown();
         });
         t.start();
         latch.await();
-        value=getSum();
+        value=caculate.returnSum();
         System.out.println(value);
 
 

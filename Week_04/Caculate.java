@@ -13,4 +13,8 @@ public class Caculate  implements Serializable {
           }
           return a+b;
       }
+
+      public int returnSum(){
+          return a+b;
+      }
 }
