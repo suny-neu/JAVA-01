@@ -1,0 +1,62 @@
+spring:
+  main:
+    allow-bean-definition-overriding: 'true '
+  shardingsphere:
+    datasource:
+      names: m1,m2
+      m1:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: ''
+        type: com.alibaba.druid.pool.DruidDataSource
+        url: jdbc:mysql://localhost:3316/shopping_1?serverTimezone=GMT%2B8
+        username: root
+      m2:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: ''
+        type: com.alibaba.druid.pool.DruidDataSource
+        url: jdbc:mysql://localhost:3326/shopping_2?serverTimezone=GMT%2B8
+        username: root
+    props:
+      sql:
+        show: true
+    sharding:
+      tables:
+#        t_order:
+#          actual-data-nodes: m$->{1..2}.t_order_$->{1..2}
+#          database-strategy:
+#            inline:
+#              algorithm-expression: m$->{id % 2 + 1}
+#              sharding-column: 'id '
+#          key-generator:
+#            column: id
+#            type: SNOWFLAKE
+#          table-strategy:
+#            inline:
+#              algorithm-expression: t_order_$->{id % 2 + 1}
+#              sharding-column: id
+        product:
+          actual-data-nodes: m$->{1..2}.t_product_$->{1..2}
+          database-strategy:
+            inline:
+              algorithm-expression: m$->{id % 2 + 1}
+              sharding-column: id
+          key-generator:
+            column: id
+            type: SNOWFLAKE
+          table-strategy:
+            inline:
+              algorithm-expression: t_product_$->{product_id % 2 + 1}
+              sharding-column: product_id
+#        t_user:
+#          actual-data-nodes: m$->{1..2}.t_user_$->{1..2}
+#          database-strategy:
+#            inline:
+#              algorithm-expression: m$->{id % 2 + 1}
+#              sharding-column: 'id '
+#          key-generator:
+#            column: id
+#            type: SNOWFLAKE
+#          table-strategy:
+#            inline:
+#              algorithm-expression: t_user_$->{id % 2 + 1}
+#              sharding-column: id
