@@ -1,0 +1,15 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    master: # –¥’Àªß
+      jdbc-url: jdbc:mysql://localhost:3316/db?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
+      username: root
+      password:
+    slave: # ÷ª∂¡’Àªß
+      jdbc-url: jdbc:mysql://localhost:3326/db?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
+      username: root
+      password:
+
+
+
